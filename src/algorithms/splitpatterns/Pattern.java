@@ -153,13 +153,21 @@ public class Pattern {
 	}
 	
 	public boolean isFrequencyPattern(int size, float support){
-		float a= 0.0f;
-		a = weight/(float)size;
-		if(a >= support){
+		int minsuppAbsolute=0;
+		if(support<1){
+			minsuppAbsolute =  (int) Math.ceil(size*support);
+			if(minsuppAbsolute==0){
+				minsuppAbsolute=1;
+			}		
+		}else {
+			minsuppAbsolute=(int) Math.ceil(support);
+		}
+		if(weight >= minsuppAbsolute){
 			return true;
 		}else {
 			return false;
 		}
+		
 		
 	}
 
